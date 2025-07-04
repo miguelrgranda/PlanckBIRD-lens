@@ -1,0 +1,3 @@
+data/lensing_maps/*.pkl
+.ipynb_checkpoints/
+**/.ipynb_checkpoints/
