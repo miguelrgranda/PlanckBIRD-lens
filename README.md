@@ -67,6 +67,13 @@ Installing cmblensplus can be complicated, and in reality is barely used:
 	from utils import analysis as ana --> import analysis as ana
 	from utils import binning --> import binning
     	```
+### Downloading Planck Galactic masks:
+
+For running the filtering with the Planck Galactic masks, the file HFI_Mask_GalPlane-apo0_2048_R2.00.fits needs to be downloaded into the input directory:
+
+```bash
+wget -O HFI_Mask_GalPlane-apo0_2048_R2.00.fits "http://pla.esac.esa.int/pla/aio/product-action?MAP.MAP_ID=HFI_Mask_GalPlane-apo0_2048_R2.00.fits"
+```
 
 ## General description:
 	
