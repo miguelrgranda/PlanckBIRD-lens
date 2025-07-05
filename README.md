@@ -63,7 +63,7 @@ Installing cmblensplus can be complicated, and in reality is barely used:
 	     )
   	```
  	*    Copying ``analysis.py`` and ``binning.py`` to PlanckBIRD-lens directory and change the following lines in ``reconstruction.py``:
-   	```
+   	```python3
 	from utils import analysis as ana --> import analysis as ana
 	from utils import binning --> import binning
     	```
