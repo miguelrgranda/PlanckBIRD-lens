@@ -24,14 +24,14 @@ Here are the dependencies needed to run the pipeline. We also include the versio
 
 * [lensQUEST](https://github.com/miguelrgranda/lensquest) (modified version from the [original code](https://github.com/doicbek/lensquest) from Dominic Beck)
 * [lensingbiases](https://github.com/miguelrgranda/lensingbiases) (modified version from the [original code](https://github.com/JulienPeloton/lensingbiases) from Julien Peloton) 
-* cmblensplus 
-* pysm3
-* healpy
-* mpi4py
-* pymaster
-* lenspyx
+* cmblensplus v0.4
+* pysm3 v3.4.0
+* healpy v1.16.2
+* mpi4py v3.0.3
+* pymaster v1.4
+* lenspyx v2.0.5
 * cobaya
-* Others: scipy, numpy, pickle, astropy, tqdm, matplotlib.
+* Others: scipy v1.13.1, numpy v1.23.5, pickle v4.0, astropy v5.3, tqdm v4.64.1, matplotlib v3.7.1.
 	
 ### Modification in lensQUEST
 
@@ -42,6 +42,31 @@ We have included the implementation of the Realization-dependent N0 computation 
 The N1 computation was modified to allow computing the N1 bias without needing to use a ini file. Aditionally, in this new version the power spectra noise is not calculated internally and now the observed angular power spectra is passed as a parameter. 
 
 All the information is passed via the arguments of the python function LensingBiases.compute_n1_py(...), which computes the unnormalized N1 bias using OPENMP parallelization. We did not integrate the N0 computation accordingly in this modified version, because we are computing it using lensquest or MCN0 implementation in PlanckBIRD-lens.
+
+### About cmblensplus
+
+Installing cmblensplus can be complicated, and in reality is barely used:
+
+* In ``filtering.py``, cmblensplus is imported only for the pixel-based filtering which is not used in our code and left there for comparison purposes. By commenting the line ''import curvedsky as cs``, you solve the import error. 
+
+* In ``reconstruction.py`` only the python scripts ``analysis.py`` and ``binning.py`` from cmblensplus/utils are needed. There are two possible solutions:
+	*  Installing cmblensplus/utils by creating a setup.py inside the cmblensplus folder and running in the terminal ``pip3 install .``:
+ 	```bash
+  	#!/usr/bin/env python
+
+	# Made by Miguel Ruiz Granda
+	from distutils.core import setup
+	
+	setup(name='utils',
+	      version='1.0',
+	      packages=['utils'],
+	     )
+  	```
+ 	*    Copying ``analysis.py`` and ``binning.py`` to PlanckBIRD-lens directory and change the following lines in ``reconstruction.py``:
+   	```
+	from utils import analysis as ana --> import analysis as ana
+	from utils import binning --> import binning
+    	```
 
 ## General description:
 	
