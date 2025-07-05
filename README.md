@@ -22,8 +22,8 @@ Cite other papers for the dependencies?
 
 Here are the dependencies needed to run the pipeline. We also include the version
 
-* lensquest (modified from version )
-* lensingbiases (modified from version ) 
+* [lensquest](https://github.com/miguelrgranda/lensquest) (modified version from the [original code](https://github.com/doicbek/lensquest) from Dominic Beck)
+* [lensingbiases](https://github.com/miguelrgranda/lensingbiases) (modified version from the [original code](https://github.com/JulienPeloton/lensingbiases) from Julien Peloton) 
 * cmblensplus 
 * pysm3
 * healpy
