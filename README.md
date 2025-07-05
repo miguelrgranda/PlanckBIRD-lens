@@ -22,7 +22,7 @@ Cite other papers for the dependencies?
 
 Here are the dependencies needed to run the pipeline. We also include the version
 
-* [lensquest](https://github.com/miguelrgranda/lensquest) (modified version from the [original code](https://github.com/doicbek/lensquest) from Dominic Beck)
+* [lensQUEST](https://github.com/miguelrgranda/lensquest) (modified version from the [original code](https://github.com/doicbek/lensquest) from Dominic Beck)
 * [lensingbiases](https://github.com/miguelrgranda/lensingbiases) (modified version from the [original code](https://github.com/JulienPeloton/lensingbiases) from Julien Peloton) 
 * cmblensplus 
 * pysm3
@@ -33,9 +33,15 @@ Here are the dependencies needed to run the pipeline. We also include the versio
 * cobaya
 * Others: scipy, numpy, pickle, astropy, tqdm, matplotlib.
 	
-### Modification in lensquest
+### Modification in lensQUEST
+
+We have included the implementation of the Realization-dependent N0 computation using a semi-analytical approach. The function to call is lensquest.quest_norm_RD_iterSims(...), which uses OpenMP parallelization for significantly faster execution.
 
 ### Modification in lensingbiases
+
+The N1 computation was modified to allow computing the N1 bias without needing to use a ini file. Aditionally, in this new version the power spectra noise is not calculated internally and now the observed angular power spectra is passed as a parameter. 
+
+All the information is passed via the arguments of the python function LensingBiases.compute_n1_py(...), which computes the unnormalized N1 bias using OPENMP parallelization. We did not integrate the N0 computation accordingly in this modified version, because we are computing it using lensquest or MCN0 implementation in PlanckBIRD-lens.
 
 ## General description:
 	
