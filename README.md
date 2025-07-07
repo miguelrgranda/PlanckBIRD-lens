@@ -88,10 +88,12 @@ wget -O HFI_Mask_GalPlane-apo0_2048_R2.00.fits "http://pla.esac.esa.int/pla/aio/
 ### Jupyter-notebooks
 
 * [notebooks/HILC_figures_publish.ipynb](https://github.com/miguelrgranda/PlanckBIRD-lens/blob/main/notebooks/HILC_figures_publish.ipynb) -- generates plots of the HILC residuals for the different experiments and foreground complexities.
+
+* [notebooks/harmonic_filtering_publish.ipynb](https://github.com/miguelrgranda/PlanckBIRD-lens/blob/main/notebooks/harmonic_filtering_publish.ipynb) -- generates plots of the harmonic filtering performance.
     
 * [notebooks/bias_estimation_publish.ipynb](https://github.com/miguelrgranda/PlanckBIRD-lens/blob/main/notebooks/bias_estimation_publish.ipynb) -- generates plots of the N0 bias, N1 bias, Monte Carlo (MC) normalization correction, Mean-Field (MF), and the Minimum Variance (MV) weights.
 
-* [notebooks/Lensing_map_publish.ipynb](https://github.com/miguelrgranda/PlanckBIRD-lens/blob/main/notebooks/Lensing_map_publish.ipynb) -- generates plots of the lensing maps for the different experiments and for the simple foregrounds.
+* [notebooks/lensing_map_publish.ipynb](https://github.com/miguelrgranda/PlanckBIRD-lens/blob/main/notebooks/lensing_map_publish.ipynb) -- generates plots of the lensing maps for the different experiments and for the simple foregrounds.
 
 * [notebooks/qcl_lensing_power_spectrum_publish.ipynb](https://github.com/miguelrgranda/PlanckBIRD-lens/blob/main/notebooks/qcl_lensing_power_spectrum_publish.ipynb) -- generates plots of the lensing bandpowers for the different experiments and foreground complexities. It also computes the lensing Signal-to-noise ratio (SNR) from the lensing bandpowers of the 400 simulations.
 
