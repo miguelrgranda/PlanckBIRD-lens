@@ -30,6 +30,7 @@ Here are the dependencies needed to run the pipeline. We also include the versio
 * pymaster v1.4
 * lenspyx v2.0.5
 * cobaya
+* GetDist
 * Others: scipy v1.13.1, numpy v1.23.5, pickle v4.0, astropy v5.3, tqdm v4.64.1, matplotlib v3.7.1.
 	
 ### Modification in lensQUEST
