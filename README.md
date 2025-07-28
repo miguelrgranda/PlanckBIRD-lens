@@ -14,13 +14,13 @@ Miguel Ruiz-Granda (ruizm@ifca.unican.es), Christian Gimeno-Amo (gimenoc@ifca.un
 
 ## Citation
 
-If you use any of this code, please cite: M. Ruiz-Granda et al, "LiteBIRD Science Goals and Forecasts: Improved full-sky reconstruction of the gravitational lensing potential through the combination of Planck and LiteBIRD data".
+If you use any of this code, please cite: M. Ruiz-Granda *et al* 2025, "LiteBIRD Science Goals and Forecasts: Improved full-sky reconstruction of the gravitational lensing potential through the combination of Planck and LiteBIRD data".
 
 ## Dependencies
 
 Here are the dependencies needed to run the pipeline. We also include the version
 
-* python3.9.0
+* python v3.9.0
 * [lensQUEST](https://github.com/miguelrgranda/lensquest) (modified version from the [original code](https://github.com/doicbek/lensquest) from Dominic Beck)
 * [lensingbiases](https://github.com/miguelrgranda/lensingbiases) (modified version from the [original code](https://github.com/JulienPeloton/lensingbiases) from Julien Peloton) 
 * cmblensplus v0.4
@@ -39,15 +39,15 @@ We have included the implementation of the Realization-dependent N0 computation 
 
 ### Modification in lensingbiases
 
-The N1 computation was modified to allow computing the N1 bias without needing to use a ini file. Aditionally, in this new version the power spectra noise is not calculated internally and now the observed angular power spectra is passed as a parameter. 
+The N1 computation was modified to allow computing the N1 bias without needing to use an ini file. Additionally, in this new version, the power spectra noise is not calculated internally, and now the observed angular power spectra is passed as a parameter. 
 
-All the information is passed via the arguments of the python function LensingBiases.compute_n1_py(...), which computes the unnormalized N1 bias using OPENMP parallelization. We did not integrate the N0 computation accordingly in this modified version, because we are computing it using lensquest or MCN0 implementation in PlanckBIRD-lens.
+All the information is passed via the arguments of the python function LensingBiases.compute_n1_py(...), which computes the unnormalized N1 bias using OPENMP parallelization. We did not integrate the N0 computation accordingly in this modified version, because we are computing it using lensquest or the MCN0 implementation in PlanckBIRD-lens.
 
 ### About cmblensplus
 
-Installing cmblensplus can be complicated, and in reality is barely used:
+Installing cmblensplus can be complicated, and in reality, it is barely used:
 
-* In ``filtering.py``, cmblensplus is imported only for the pixel-based filtering which is not used in our code and left there for comparison purposes. By commenting the line ''import curvedsky as cs``, you solve the import error. 
+* In ``filtering.py``, cmblensplus is imported only for the pixel-based filtering, which is not used in our code and left there for comparison purposes. By commenting the line ''import curvedsky as cs``, you solve the import error. 
 
 * In ``reconstruction.py`` only the python scripts ``analysis.py`` and ``binning.py`` from cmblensplus/utils are needed. There are two possible solutions:
 	*  Installing cmblensplus/utils by creating a setup.py inside the cmblensplus folder and running in the terminal ``pip3 install .``:
@@ -69,7 +69,7 @@ Installing cmblensplus can be complicated, and in reality is barely used:
     	```
 ### Downloading Planck Galactic masks:
 
-For running the filtering with the Planck Galactic masks, the file HFI_Mask_GalPlane-apo0_2048_R2.00.fits needs to be downloaded into the input directory:
+For running the filtering with the *Planck* Galactic masks, the file ``HFI_Mask_GalPlane-apo0_2048_R2.00.fits`` needs to be downloaded into the input directory:
 
 ```bash
 wget -O HFI_Mask_GalPlane-apo0_2048_R2.00.fits "http://pla.esac.esa.int/pla/aio/product-action?MAP.MAP_ID=HFI_Mask_GalPlane-apo0_2048_R2.00.fits"
@@ -77,28 +77,28 @@ wget -O HFI_Mask_GalPlane-apo0_2048_R2.00.fits "http://pla.esac.esa.int/pla/aio/
 
 ## General description:
 	
-* [combination.py](combination.py) -- simulates frequency maps using the experiments.yalm information for *Planck* and *LiteBIRD*. It performs component separation on those frequency maps for *Planck*, *LiteBIRD* and *Planck* + *LiteBIRD*.
+* [combination.py](combination.py) -- Simulates frequency maps using the experiments.yalm information for *Planck* and *LiteBIRD*. It performs component separation on those frequency maps for *Planck*, *LiteBIRD*, and *Planck* + *LiteBIRD*.
 
-* [filtering.py](filtering.py) -- filters the cleaned maps using an Harmonic C-inverse filtering. This is a step needed for running the Quadratic Estimators (QE).
+* [filtering.py](filtering.py) -- Filters the cleaned maps using an harmonic C-inverse filtering. This is a step needed for running the quadratic estimators (QE).
 
-* [reconstruction.py](reconstruction.py) -- reconstruct the lensing potential using the Quadratic Estimators formalism. It also includes tools for debiasing the lensing power spectrum, especially for the N0 and N1 bias estimation.
+* [reconstruction.py](reconstruction.py) -- Reconstruct the lensing potential using the quadratic estimators formalism. It also includes tools for debiasing the lensing power spectrum, especially for the N0 and N1 bias estimation.
 
-* [cosmological_parameter_estimation.py](cosmological_parameter_estimation) -- runs a MCMC to estimate the constraints on $H_0$ -- $\sigma_8$ -- $\Omega_\mathrm{m}$ using a lensing-only likelihood.
+* [cosmological_parameter_estimation.py](cosmological_parameter_estimation) -- Runs an MCMC to estimate the constraints on $H_0$ -- $\sigma_8$ -- $\Omega_\mathrm{m}$ using a lensing-only likelihood.
 
 ### Jupyter-notebooks
 
-* [notebooks/HILC_figures_publish.ipynb](notebooks/HILC_figures_publish.ipynb) -- generates plots of the HILC residuals for the different experiments and foreground complexities.
+* [notebooks/HILC_figures_publish.ipynb](notebooks/HILC_figures_publish.ipynb) -- Generates plots of the HILC residuals for the different experiments and foreground complexities.
 
-* [notebooks/harmonic_filtering_publish.ipynb](notebooks/harmonic_filtering_publish.ipynb) -- generates plots of the harmonic filtering performance.
+* [notebooks/harmonic_filtering_publish.ipynb](notebooks/harmonic_filtering_publish.ipynb) -- Generates plots of the harmonic filtering performance.
     
-* [notebooks/bias_estimation_publish.ipynb](notebooks/bias_estimation_publish.ipynb) -- generates plots of the N0 bias, N1 bias, Monte Carlo (MC) normalization correction, Mean-Field (MF), and the Minimum Variance (MV) weights.
+* [notebooks/bias_estimation_publish.ipynb](notebooks/bias_estimation_publish.ipynb) -- Generates plots of the N0 bias, N1 bias, Monte Carlo (MC) normalization correction, mean-field (MF), and the minimum variance (MV) weights.
 
-* [notebooks/lensing_map_publish.ipynb](notebooks/lensing_map_publish.ipynb) -- generates plots of the lensing maps for the different experiments and for the simple foregrounds.
+* [notebooks/lensing_map_publish.ipynb](notebooks/lensing_map_publish.ipynb) -- Generates plots of the lensing maps for the different experiments and the simple foregrounds.
 
-* [notebooks/qcl_lensing_power_spectrum_publish.ipynb](notebooks/qcl_lensing_power_spectrum_publish.ipynb) -- generates plots of the lensing bandpowers for the different experiments and foreground complexities. It also computes the lensing Signal-to-noise ratio (SNR) from the lensing bandpowers of the 400 simulations.
+* [notebooks/qcl_lensing_power_spectrum_publish.ipynb](notebooks/qcl_lensing_power_spectrum_publish.ipynb) -- Generates plots of the lensing bandpowers for the different experiments and foreground complexities. It also computes the lensing signal-to-noise ratio (SNR) from the lensing bandpowers of the 400 simulations.
 
-* [notebooks/cosmological_parameter_estimation_publish.ipynb](notebooks/cosmological_parameter_estimation_publish.ipynb) -- plots the constrains on $H_0$, $\Omega_\mathrm{m}$ and $\sigma_8$ from the MCMC chains using the lensing-only likelihood.
+* [notebooks/cosmological_parameter_estimation_publish.ipynb](notebooks/cosmological_parameter_estimation_publish.ipynb) -- Plots the constrains on $H_0$, $\Omega_\mathrm{m}$ and $\sigma_8$ from the MCMC chains using the lensing-only likelihood.
   
-* [notebooks/delensing_Planck_LiteBIRD_publish.ipynb](notebooks/delensing_Planck_LiteBIRD_publish.ipynb) -- performs a semi-analytical delensing eficiency estimation and estimates the improvement on the constraints on the tensor-to-scalar ratio constraints.
+* [notebooks/delensing_Planck_LiteBIRD_publish.ipynb](notebooks/delensing_Planck_LiteBIRD_publish.ipynb) -- Performs a semi-analytical delensing efficiency estimation and estimates the improvement on the constraints on the tensor-to-scalar ratio constraints.
 
 
