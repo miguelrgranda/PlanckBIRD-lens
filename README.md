@@ -62,7 +62,7 @@ Installing cmblensplus can be complicated, and in reality, it is barely used:
 	      packages=['utils'],
 	     )
   	```
- 	*    Copying [``analysis.py``](https://github.com/toshiyan/cmblensplus/blob/master/utils/analysis.py) and [``binning.py``](https://github.com/toshiyan/cmblensplus/blob/master/utils/binning.py) to ``PlanckBIRD-lens`` directory and change the following lines in [``reconstruction.py``](reconstruction.py#L37):
+ 	*    Copying [``analysis.py``](https://github.com/toshiyan/cmblensplus/blob/master/utils/analysis.py) and [``binning.py``](https://github.com/toshiyan/cmblensplus/blob/master/utils/binning.py) to ``PlanckBIRD-lens/notebooks`` directory and change the following lines in [``reconstruction.py``](reconstruction.py#L37):
    	```python3
 	from utils import analysis as ana --> import analysis as ana
 	from utils import binning --> import binning
