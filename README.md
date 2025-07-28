@@ -23,7 +23,7 @@ Here are the dependencies needed to run the pipeline. We also include the versio
 * python v3.9.0
 * [lensQUEST](https://github.com/miguelrgranda/lensquest) (modified version from the [original code](https://github.com/doicbek/lensquest) from Dominic Beck)
 * [lensingbiases](https://github.com/miguelrgranda/lensingbiases) (modified version from the [original code](https://github.com/JulienPeloton/lensingbiases) from Julien Peloton) 
-* cmblensplus v0.4
+* [cmblensplus](https://github.com/toshiyan/cmblensplus) v0.4
 * pysm3 v3.4.0
 * healpy v1.16.2
 * mpi4py v3.0.3
@@ -47,10 +47,10 @@ All the information is passed via the arguments of the python function LensingBi
 
 Installing cmblensplus can be complicated, and in reality, it is barely used:
 
-* In ``filtering.py``, cmblensplus is imported only for the pixel-based filtering, which is not used in our code and left there for comparison purposes. By commenting the line ''import curvedsky as cs``, you solve the import error. 
+* In [``filtering.py``](filtering.py), ``cmblensplus`` is imported only for the pixel-based filtering, which is not used in our code and left there for comparison purposes. By commenting the line [``import curvedsky as cs``](filtering.py#L27), you solve the import error. 
 
-* In ``reconstruction.py`` only the python scripts ``analysis.py`` and ``binning.py`` from cmblensplus/utils are needed. There are two possible solutions:
-	*  Installing cmblensplus/utils by creating a setup.py inside the cmblensplus folder and running in the terminal ``pip3 install .``:
+* In [``reconstruction.py``](reconstruction.py) only the python scripts [``analysis.py``](https://github.com/toshiyan/cmblensplus/blob/master/utils/analysis.py) and [``binning.py``](https://github.com/toshiyan/cmblensplus/blob/master/utils/binning.py) from [``cmblensplus/utils``](https://github.com/toshiyan/cmblensplus/tree/master/utils) are needed. There are two possible solutions:
+	*  Installing ``cmblensplus/utils`` by creating a ``setup.py`` inside the cmblensplus folder and running in the terminal ``pip3 install .``:
  	```bash
   	#!/usr/bin/env python
 
@@ -62,11 +62,10 @@ Installing cmblensplus can be complicated, and in reality, it is barely used:
 	      packages=['utils'],
 	     )
   	```
- 	*    Copying ``analysis.py`` and ``binning.py`` to PlanckBIRD-lens directory and change the following lines in ``reconstruction.py``:
+ 	*    Copying [``analysis.py``](https://github.com/toshiyan/cmblensplus/blob/master/utils/analysis.py) and [``binning.py``](https://github.com/toshiyan/cmblensplus/blob/master/utils/binning.py) to ``PlanckBIRD-lens`` directory and change the following lines in [``reconstruction.py``](reconstruction.py#L37):
    	```python3
 	from utils import analysis as ana --> import analysis as ana
 	from utils import binning --> import binning
-    	```
 ### Downloading Planck Galactic masks:
 
 For running the filtering with the *Planck* Galactic masks, the file ``HFI_Mask_GalPlane-apo0_2048_R2.00.fits`` needs to be downloaded into the input directory:
