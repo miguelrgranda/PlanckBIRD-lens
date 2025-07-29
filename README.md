@@ -82,7 +82,7 @@ wget -O HFI_Mask_GalPlane-apo0_2048_R2.00.fits "http://pla.esac.esa.int/pla/aio/
 
 * [reconstruction.py](reconstruction.py) -- Reconstruct the lensing potential using the quadratic estimators formalism. It also includes tools for debiasing the lensing power spectrum, especially for the N0 and N1 bias estimation.
 
-* [cosmological_parameter_estimation.py](cosmological_parameter_estimation) -- Runs an MCMC to estimate the constraints on $H_0$ -- $\sigma_8$ -- $\Omega_\mathrm{m}$ using a lensing-only likelihood.
+* [mcmc_cosmoparams_CMB_lensing.py](mcmc_cosmoparams_CMB_lensing.py) -- Runs an MCMC to estimate the constraints on $H_0$ -- $\sigma_8$ -- $\Omega_\mathrm{m}$ using a lensing-only likelihood. Previously [preprocessing_TF_cosmoparams.py](preprocessing_TF_cosmoparams.py) needs to be run to compute the covariances matrices and to apply the Transfer Function correction.
 
 ### Jupyter-notebooks
 
