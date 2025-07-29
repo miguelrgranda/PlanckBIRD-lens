@@ -1,0 +1,87 @@
+theory:
+  classy:
+    extra_args:
+      N_ncdm: 1
+      N_ur: 2.0328
+      non_linear: halofit
+      lensing: true
+      accurate_lensing: 1
+      m_ncdm: 0.06
+      output: tCl, pCl, lCl, mPk
+      modes: s
+    stop_at_error: false
+likelihood:
+  my_cl_phi_phi_like:
+    external: true
+    requires:
+      Cl:
+        pp: 1000
+params:
+  tau_reio: 0.0544
+  H0:
+    prior:
+      max: 100
+      min: 40
+    ref:
+      dist: norm
+      loc: 67.36
+      scale: 2
+    proposal: 2
+    latex: H_{0}
+  n_s:
+    prior:
+      dist: norm
+      loc: 0.965
+      scale: 0.02
+    ref:
+      dist: norm
+      loc: 0.965
+      scale: 0.002
+    proposal: 0.002
+    latex: n_\mathrm{s}
+  A_s:
+    latex: A_\mathrm{s}
+    value: 'lambda logA: 1e-10*np.exp(logA)'
+  logA:
+    drop: true
+    latex: \log(10^{10} A_\mathrm{s})
+    prior:
+      max: 4
+      min: 2
+    proposal: 0.001
+    ref:
+      dist: norm
+      loc: 3.044
+      scale: 0.001
+  omega_b:
+    latex: \Omega_\mathrm{b} h^2
+    prior:
+      dist: norm
+      loc: 0.0224
+      scale: 0.0005
+    proposal: 0.0001
+    ref:
+      dist: norm
+      loc: 0.02237
+      scale: 0.0005
+  omega_cdm:
+    latex: \Omega_\mathrm{c} h^2
+    prior:
+      max: 0.99
+      min: 0.005
+    ref:
+      dist: norm
+      loc: 0.12
+      scale: 0.001
+    proposal: 0.0005
+  sigma8:
+    latex: \sigma_{8}
+  Omega_m:
+    latex: \Omega_\mathrm{m}
+sampler:
+  mcmc:
+    burn_in: 0
+    Rminus1_stop: 0.005
+    covmat: /gpfs/projects/astro/gimeno/Lensing_Paper/Final_Results/Initial_CovMat/Initial_Cov.txt
+output: .
+progress: true
