@@ -11,10 +11,8 @@ import numpy as np
 import pickle as plk
 from astropy.io import ascii
 
-qcl_dir = sys.argv[1]
-cov_dir = sys.argv[2]
-fid_spectra_dir = sys.argv[3]
-TF_dir = sys.argv[4]
+data_dir = sys.argv[1]
+fid_spectra_dir = sys.argv[2]
 
 
 def read_pkl(dir, name):
@@ -90,17 +88,17 @@ def binning_opt_core(cl,vl,lmin,lmax,n,bp):
 
 # Loading input files
 
-data_Planck_no_fg = read_pkl(qcl_dir, "/qcl_debiased_MC_norm_binned_TT_TE_EE_TB_EB_no_fg_Planck_fsky_0.7_MV.pkl")
-data_LiteBIRD_no_fg = read_pkl(qcl_dir, "/qcl_debiased_MC_norm_binned_TT_TE_EE_TB_EB_no_fg_LiteBIRD_fsky_0.8_MV.pkl")
-data_Planck_LiteBIRD_no_fg = read_pkl(qcl_dir, "/qcl_debiased_MC_norm_binned_TT_TE_EE_TB_EB_no_fg_LiteBIRD_Planck_fsky_0.8_MV.pkl")
+data_Planck_no_fg = read_pkl(data_dir, "/binned_lensing_power_spectrum/qcl_debiased_MC_norm_binned_TT_TE_EE_TB_EB_no_fg_Planck_fsky_0.7_MV.pkl")
+data_LiteBIRD_no_fg = read_pkl(data_dir, "/binned_lensing_power_spectrum/qcl_debiased_MC_norm_binned_TT_TE_EE_TB_EB_no_fg_LiteBIRD_fsky_0.8_MV.pkl")
+data_Planck_LiteBIRD_no_fg = read_pkl(data_dir, "/binned_lensing_power_spectrum/qcl_debiased_MC_norm_binned_TT_TE_EE_TB_EB_no_fg_LiteBIRD_Planck_fsky_0.8_MV.pkl")
 
-data_Planck_s1d1 = read_pkl(qcl_dir, "/qcl_debiased_MC_norm_binned_TT_TE_EE_TB_EB_s1_d1_f1_a1_co1_Planck_fsky_0.7_MV.pkl")
-data_LiteBIRD_s1d1 = read_pkl(qcl_dir, "/qcl_debiased_MC_norm_binned_TT_TE_EE_TB_EB_s1_d1_f1_a1_co1_LiteBIRD_fsky_0.8_MV.pkl")
-data_Planck_LiteBIRD_s1d1 = read_pkl(qcl_dir, "/qcl_debiased_MC_norm_binned_TT_TE_EE_TB_EB_s1_d1_f1_a1_co1_LiteBIRD_Planck_fsky_0.8_MV.pkl")
+data_Planck_s1d1 = read_pkl(data_dir, "/binned_lensing_power_spectrum/qcl_debiased_MC_norm_binned_TT_TE_EE_TB_EB_s1_d1_f1_a1_co1_Planck_fsky_0.7_MV.pkl")
+data_LiteBIRD_s1d1 = read_pkl(data_dir, "/binned_lensing_power_spectrum/qcl_debiased_MC_norm_binned_TT_TE_EE_TB_EB_s1_d1_f1_a1_co1_LiteBIRD_fsky_0.8_MV.pkl")
+data_Planck_LiteBIRD_s1d1 = read_pkl(data_dir, "/binned_lensing_power_spectrum/qcl_debiased_MC_norm_binned_TT_TE_EE_TB_EB_s1_d1_f1_a1_co1_LiteBIRD_Planck_fsky_0.8_MV.pkl")
 
-data_Planck_s5d10 = read_pkl(qcl_dir, "/qcl_debiased_MC_norm_binned_TT_TE_EE_TB_EB_s5_d10_a1_f1_co3_Planck_fsky_0.7_MV.pkl")
-data_LiteBIRD_s5d10 = read_pkl(qcl_dir, "/qcl_debiased_MC_norm_binned_TT_TE_EE_TB_EB_s5_d10_a1_f1_co3_LiteBIRD_fsky_0.8_MV.pkl")
-data_Planck_LiteBIRD_s5d10 = read_pkl(qcl_dir, "/qcl_debiased_MC_norm_binned_TT_TE_EE_TB_EB_s5_d10_a1_f1_co3_LiteBIRD_Planck_fsky_0.8_MV.pkl")
+data_Planck_s5d10 = read_pkl(data_dir, "/binned_lensing_power_spectrum/qcl_debiased_MC_norm_binned_TT_TE_EE_TB_EB_s5_d10_a1_f1_co3_Planck_fsky_0.7_MV.pkl")
+data_LiteBIRD_s5d10 = read_pkl(data_dir, "/binned_lensing_power_spectrum/qcl_debiased_MC_norm_binned_TT_TE_EE_TB_EB_s5_d10_a1_f1_co3_LiteBIRD_fsky_0.8_MV.pkl")
+data_Planck_LiteBIRD_s5d10 = read_pkl(data_dir, "/binned_lensing_power_spectrum/qcl_debiased_MC_norm_binned_TT_TE_EE_TB_EB_s5_d10_a1_f1_co3_LiteBIRD_Planck_fsky_0.8_MV.pkl")
 
 # Splits for covariance matrix (MVMC means = minimum variance estimator)
 
@@ -152,31 +150,31 @@ Cov_PlanckBIRD_s5d10 = np.cov(Cov_Planck_LiteBIRD_s5d10.T)
 
 # Save covariance matrices
 
-if os.path.exist(cov_dir + "/Cov_Mat") == False:
-    os.makedirs(cov_dir + "/Cov_Mat/Planck/s1d1")
-    os.makedirs(cov_dir + "/Cov_Mat/Planck/s5d10")
-    os.makedirs(cov_dir + "/Cov_Mat/LiteBIRD/s1d1")
-    os.makedirs(cov_dir + "/Cov_Mat/LiteBIRD/s5d10")
-    os.makedirs(cov_dir + "/Cov_Mat/Planck+LiteBIRD/s1d1")
-    os.makedirs(cov_dir + "/Cov_Mat/Planck+LiteBIRD/s5d10")
+if os.path.exist(data_dir + "/MCMC_chains") == False:
+    os.makedirs(data_dir + "/MCMC_chains/Planck/s1d1")
+    os.makedirs(data_dir + "/MCMC_chains/Planck/s5d10")
+    os.makedirs(data_dir + "/MCMC_chains/LiteBIRD/s1d1")
+    os.makedirs(data_dir + "/MCMC_chains/LiteBIRD/s5d10")
+    os.makedirs(data_dir + "/MCMC_chains/Planck+LiteBIRD/s1d1")
+    os.makedirs(data_dir + "/MCMC_chains/Planck+LiteBIRD/s5d10")
 
-path = cov_dir + "/Cov_Mat/Planck/s1d1/Cov_PhiPhi.npy"
+path = data_dir + "/MCMC_chains/Planck/s1d1/Cov_PhiPhi.npy"
 np.save(path, Cov_Planck_s1d1)
 
-path = cov_dir + "/Cov_Mat/LiteBIRD/s1d1/Cov_PhiPhi.npy"
+path = data_dir + "/MCMC_chains/LiteBIRD/s1d1/Cov_PhiPhi.npy"
 np.save(path, Cov_LiteBIRD_s1d1)
 
-path = cov_dir + "/Cov_Mat/Planck+LiteBIRD/s1d1/Cov_PhiPhi.npy"
+path = data_dir + "/MCMC_chains/Planck+LiteBIRD/s1d1/Cov_PhiPhi.npy"
 np.save(path, Cov_PlanckBIRD_s1d1)
 
 
-path = cov_dir + "/Cov_Mat/Planck/s5d10/Cov_PhiPhi.npy"
+path = data_dir + "/MCMC_chains/Planck/s5d10/Cov_PhiPhi.npy"
 np.save(path, Cov_Planck_s5d10)
 
-path = cov_dir + "/Cov_Mat/LiteBIRD/s5d10/Cov_PhiPhi.npy"
+path = data_dir + "/MCMC_chains/LiteBIRD/s5d10/Cov_PhiPhi.npy"
 np.save(path, Cov_LiteBIRD_s5d10)
 
-path = cov_dir + "/Cov_Mat/Planck+LiteBIRD/s5d10/Cov_PhiPhi.npy"
+path = data_dir + "/MCMC_chains/Planck+LiteBIRD/s5d10/Cov_PhiPhi.npy"
 np.save(path, Cov_PlanckBIRD_s5d10)
 
 # Load the fiducial spectra
@@ -213,9 +211,9 @@ TF_Planck = mean_MVMV_Planck_no_fg - binning_0_Planck
 TF_LiteBIRD = mean_MVMV_LiteBIRD_no_fg - binning_0_LiteBIRD
 TF_PlanckBIRD = mean_MVMV_Planck_LiteBIRD_no_fg - binning_0_Planck
 
-if os.path.exist(TF_dir + "/TF") == False:
-    os.makedirs(TF_dir + "/TF")
+if os.path.exist(data_dir + "/TF") == False:
+    os.makedirs(data_dir + "/TF")
 
-np.save(TF_dir + "/TF/TF_Planck.npy", TF_Planck)
-np.save(TF_dir + "/TF/TF_LiteBIRD.npy", TF_LiteBIRD)
-np.save(TF_dir + "/TF/TF_Planck+LiteBIRD.npy", TF_PlanckBIRD)
+np.save(data_dir + "/TF/TF_Planck.npy", TF_Planck)
+np.save(data_dir + "/TF/TF_LiteBIRD.npy", TF_LiteBIRD)
+np.save(data_dir + "/TF/TF_Planck+LiteBIRD.npy", TF_PlanckBIRD)
